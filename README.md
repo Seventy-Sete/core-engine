@@ -22,3 +22,18 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## Docker
+
+### Build
+
+```bash
+docker-compose -f docker-compose.yml up --build
+```
+
+### Commands
+
+```bash
+docker-compose run web rails db:migrate
+docker-compose run web rails db:seed
+```
