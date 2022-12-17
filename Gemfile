@@ -48,3 +48,5 @@ end
 
 
 gem "faker", "~> 3.0"
+
+gem "sidekiq", "~> 7.0"
