@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-class AuthsTest < ApplicationSystemTestCase
+class AuthTest < ApplicationSystemTestCase
   # test "visiting the index" do
-  #   visit auths_url
+  #   visit auth_url
   #
   #   assert_selector "h1", text: "Auth"
   # end
