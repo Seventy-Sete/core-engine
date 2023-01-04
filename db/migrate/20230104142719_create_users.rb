@@ -1,0 +1,11 @@
+class CreateUsers < ActiveRecord::Migration[7.0]
+  def change
+    create_table :users do |t|
+      t.binary :encrypted_email
+      t.text :email_digest
+      t.integer :keyring_id
+
+      t.timestamps
+    end
+  end
+end
