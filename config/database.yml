@@ -47,6 +47,9 @@ development:
 test:
   <<: *default
   database: core_engine_test
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASS"] %>
+  host: <%= ENV["POSTGRES_HOST"] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
