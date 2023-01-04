@@ -48,6 +48,7 @@ group :development do
   # gem "spring"
 end
 
+gem 'ar-uuid'
 
 gem "faker", "~> 3.0"
 

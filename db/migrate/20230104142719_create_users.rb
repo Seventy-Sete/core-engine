@@ -1,11 +1,13 @@
 class CreateUsers < ActiveRecord::Migration[7.0]
   def change
+    enable_extension "pgcrypto"
+
     create_table :users do |t|
-      t.binary :encrypted_email
-      t.text :email_digest
-      t.integer :keyring_id
+      t.jsonb :email, null: false
 
       t.timestamps
     end
+
+    add_index :users, :email, unique: true
   end
 end
