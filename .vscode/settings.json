@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "Users",
     "docker",
-    "Auth"
+    "Auth",
+    "nubank"
   ]
 }

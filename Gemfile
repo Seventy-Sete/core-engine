@@ -55,3 +55,5 @@ gem "faker", "~> 3.0"
 gem "sidekiq", "~> 7.0"
 
 gem "redis", "~> 5.0"
+
+gem "nubank_sdk", "~> 0.7"

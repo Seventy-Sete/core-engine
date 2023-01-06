@@ -33,3 +33,4 @@
 /config/credentials/development.key
 
 thunder-tests
+certificates/*.p12
