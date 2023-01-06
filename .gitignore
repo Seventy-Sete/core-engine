@@ -31,3 +31,5 @@
 .env
 
 /config/credentials/development.key
+
+thunder-tests
