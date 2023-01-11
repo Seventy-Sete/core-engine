@@ -56,4 +56,5 @@ gem "sidekiq", "~> 7.0"
 
 gem "redis", "~> 5.0"
 
-gem "nubank_sdk", "~> 0.7"
+# use a local version of the gem: nubank_sdk-0.7.01.gem
+gem "nubank_sdk"

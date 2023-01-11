@@ -73,7 +73,7 @@ class Api::V1::NubankController < ApplicationController
 
     redis_key = "user:#{user_id}:nubank:#{cpf}:access_token"
     redis.set redis_key, access_token
-    redis.expire redis_key, refresh_before
+    # redis.expire redis_key, refresh_before.to_i
   end
 
   def get_nubank_token(user_id, cpf)

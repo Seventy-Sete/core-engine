@@ -1,40 +1,42 @@
 class Api::V1::LoginController < ApplicationController
-  def join
+  def join_with_email
     email = params[:email]
-    has_user = !!User.find_by(email: email)
+    data = Auth.join_with_email(email)
 
-    User.create email: email unless has_user
-    render json: User.find_by(email: email)
+    render json: data
   end
 
-  def auth
+  def login_with_email
+    email = params[:email]
+    password = request.headers['password']
+    data = Auth.login_with_email(email, password)
+
+    render json: data
+  end
+
+  def login_with_token
+    token = params[:token]
     user_id = params[:user_id]
-    user = User.find user_id
-    
-    token = generate_bear_token
-    save_session user_id, token
+    data = Auth.login_with_token(token, user_id)
 
-    render json: { token: token }
-  rescue ActiveRecord::RecordNotFound
-    render json: { error: 'User not found' }, status: :not_found
+    render json: data
   end
 
-  private
+  def create_account
+    token = params[:token]
+    email = params[:email]
+    password = request.headers['password']
 
-  def generate_bear_token
-    SecureRandom.hex(32)
+    data = Auth.create_account(token, email, password)
+    render json: data
   end
 
-  def token_expiration
-    2.hours
-  end
+  def reset_password
+    token = params[:token]
+    password = request.headers['password']
+    user_id = params[:user_id]
 
-  def save_session(user_id, token)
-    redis = Redis.new
-    redis_key = "user:#{user_id}:#{token}"
-    redis_expiration = token_expiration.to_i
-
-    redis.set redis_key, true
-    redis.expire redis_key, redis_expiration
+    data = Auth.reset_password(token, user_id, password)
+    render json: data
   end
 end
