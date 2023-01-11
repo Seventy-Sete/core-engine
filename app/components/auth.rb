@@ -4,7 +4,9 @@ module Auth
     if user.nil?
       token = generate_create_account_link(email)
       puts "Generated account creation token: #{token}"
-      # todo send email with token and email
+      
+      NotifierUserMailer.with(email: email).new_account(token).deliver_later
+
       return {
         user: nil,
         fails: nil,
@@ -46,7 +48,9 @@ module Auth
       if user_blocked?(user.id)
         token = generate_reset_password_link(user.id)
         puts "Generated reset pass token: #{token}"
-        # todo send email with token and user_id
+        
+        NotifierUserMailer.with(email: email).reset_password(user.id, token).deliver_later
+
         return {
           user: {email: user.email},
           fails: user_fails(user.id),

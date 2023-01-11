@@ -3,6 +3,7 @@
     "Users",
     "docker",
     "Auth",
-    "nubank"
+    "nubank",
+    "Mailer"
   ]
 }
