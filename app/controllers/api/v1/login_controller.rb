@@ -8,7 +8,7 @@ class Api::V1::LoginController < ApplicationController
 
   def login_with_email
     email = params[:email]
-    password = request.headers['password']
+    password = request.headers['password'] || params[:password]
     data = Auth.login_with_email(email, password)
 
     render json: data
@@ -25,7 +25,7 @@ class Api::V1::LoginController < ApplicationController
   def create_account
     token = params[:token]
     email = params[:email]
-    password = request.headers['password']
+    password = request.headers['password'] || params[:password]
 
     data = Auth.create_account(token, email, password)
     render json: data
@@ -33,7 +33,7 @@ class Api::V1::LoginController < ApplicationController
 
   def reset_password
     token = params[:token]
-    password = request.headers['password']
+    password = request.headers['password'] || params[:password]
     user_id = params[:user_id]
 
     data = Auth.reset_password(token, user_id, password)

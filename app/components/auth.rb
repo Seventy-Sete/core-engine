@@ -37,6 +37,7 @@ module Auth
     user = User.find_by(email: email)
     if user.password == password
       token = create_access_token(user.id)
+      clear_user_fails(user.id)
       return {
         user: {email: user.email, id: user.id},
         fails: user_fails(user.id),
