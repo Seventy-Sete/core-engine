@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "core-engine@seventysete.com"
+  default from: Rails.configuration.action_mailer.default_options[:from]
   layout "mailer"
 end

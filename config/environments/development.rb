@@ -62,8 +62,8 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_options = { from: ENV['GMAIL_USERNAME'] }
+  config.action_mailer.delivery_method = (ENV["GMAIL_DELIVERY_METHOD"] || 'test').to_sym
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
@@ -76,7 +76,12 @@ Rails.application.configure do
     read_timeout:         5 }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  host = 'localhost:3000'
-  config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }
+
+  config.host = ENV['host']
+  config.application_name = ENV['APPLICATION_NAME']
+  config.active_record.encryption.primary_key = ENV['ENCRYPTION_PRIMARY_KEY']
+  config.active_record.encryption.deterministic_key = ENV['ENCRYPTION_PRIMARY_KEY']
+  config.active_record.encryption.key_derivation_salt = ENV['ENCRYPTION_PRIMARY_KEY']
+  puts 'ENCRYPTION_PRIMARY_KEY'
+  puts ENV['ENCRYPTION_PRIMARY_KEY']
 end

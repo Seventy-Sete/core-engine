@@ -1,30 +1,20 @@
 class NotifierUserMailer < ApplicationMailer
-  def new_account(token)
-    @email = params[:email]
-    @token = token
-    @host = "http://localhost:3000/"
-    @path = "api/v1/auth/create-account/"
-    @support_email = "core-engine@seventysete.com"
-    @app_name = "Seventy Sete"
-
-    mail(
-      to: @email,
-      subject: 'Create your account!',
-    )
+  def welcome_email
+    @user = params[:user]
+    mail(to: @user.email, subject: "Welcome to #{Rails.configuration.application_name}")
   end
 
-  def reset_password(user_id, token)
-    @email = params[:email]
+  def new_account(token)
+    @user = params[:user]
     @token = token
-    @user_id = user_id
-    @host = "http://localhost:3000/"
-    @path = "api/v1/auth/reset-password/"
-    @support_email = "core-engine@seventysete.com"
-    @app_name = "Seventy Sete"
+    @link = "#{Rails.configuration.action_mailer.default_url_options[:host]}/create-account/#{token}?email=#{@user.email}"
+    mail(to: @user.email, subject: "#{Rails.configuration.application_name} - New Account")
+  end
 
-    mail(
-      to: @email,
-      subject: 'Reset your password!',
-    )
+  def reset_password(token)
+    @user = params[:user]
+    @token = token
+    @link = "#{Rails.configuration.action_mailer.default_url_options[:host]}/reset-password/#{token}/#{@user.id}"
+    mail(to: @user.email, subject: "#{Rails.configuration.application_name} - Reset Password")
   end
 end
