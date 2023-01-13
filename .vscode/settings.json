@@ -4,6 +4,7 @@
     "docker",
     "Auth",
     "nubank",
-    "Mailer"
+    "Mailer",
+    "Banks"
   ]
 }
