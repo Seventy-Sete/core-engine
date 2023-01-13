@@ -82,6 +82,4 @@ Rails.application.configure do
   config.active_record.encryption.primary_key = ENV['ENCRYPTION_PRIMARY_KEY']
   config.active_record.encryption.deterministic_key = ENV['ENCRYPTION_PRIMARY_KEY']
   config.active_record.encryption.key_derivation_salt = ENV['ENCRYPTION_PRIMARY_KEY']
-  puts 'ENCRYPTION_PRIMARY_KEY'
-  puts ENV['ENCRYPTION_PRIMARY_KEY']
 end
