@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :nubank, only: [] do
         collection do
-          get 'new_auth_to/:cpf', to: 'nubank#new_auth_to', constraints: { cpf: /[^\/]+/ }
+          get 'new_auth_to/:bcn', to: 'nubank#new_auth_to', constraints: { bcn: /[^\/]+/ }
         end
         member do
           get 'auth_validate', to: 'nubank#auth_validate'

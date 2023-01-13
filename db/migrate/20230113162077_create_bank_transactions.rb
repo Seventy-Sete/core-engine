@@ -4,8 +4,9 @@ class CreateBankTransactions < ActiveRecord::Migration[7.0]
       t.string :user_bank_id, null: false
       t.string :title
       t.float :amount
-      t.string :due_date
-      t.jsonb :tags
+      t.datetime :due_date
+      t.string :tags, array: true, default: []
+      t.integer :purpose, default: 7
       t.string :transaction_id
 
       t.timestamps

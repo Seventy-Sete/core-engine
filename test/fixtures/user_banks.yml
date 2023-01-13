@@ -3,11 +3,11 @@
 one:
   bank_name: MyString
   user_id: MyString
-  cpf: MyString
+  bcn: MyString
   access_key: MyString
 
 two:
   bank_name: MyString
   user_id: MyString
-  cpf: MyString
+  bcn: MyString
   access_key: MyString

@@ -6,6 +6,7 @@ one:
   amount: 1.5
   due_date: MyString
   tags: 
+  purpose: MyString
   transaction_id: MyString
 
 two:
@@ -14,4 +15,5 @@ two:
   amount: 1.5
   due_date: MyString
   tags: 
+  purpose: MyString
   transaction_id: MyString
