@@ -2,21 +2,21 @@ class Api::V1::AuthController < ApplicationController
   def join_with_email
     email = params[:email]
 
-    render json: auth.join_with_email(email)
+    render json: Auth.join_with_email(email)
   end
 
   def login_with_email
     email = params[:email]
     password = request.headers['password']
 
-    render json: auth.login_with_email(email, password)
+    render json: Auth.login_with_email(email, password)
   end
 
   def login_with_token
     token = params[:token]
     user_id = params[:user_id]
 
-    render json: auth.login_with_token(token, user_id)
+    render json: Auth.login_with_token(token, user_id)
   end
 
   def create_account
@@ -24,7 +24,7 @@ class Api::V1::AuthController < ApplicationController
     email = params[:email]
     password = request.headers['password']
 
-    render json: auth.create_account(token, email, password)
+    render json: Auth.create_account(token, email, password)
   end
 
   def reset_password
@@ -32,12 +32,6 @@ class Api::V1::AuthController < ApplicationController
     user_id = params[:user_id]
     password = request.headers['password']
 
-    render json: auth.reset_password(token, user_id, password)
-  end
-
-  private
-
-  def auth
-    @auth ||= CE::Auth
+    render json: Auth.reset_password(token, user_id, password)
   end
 end
