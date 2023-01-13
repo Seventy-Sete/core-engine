@@ -5,6 +5,7 @@
     "Auth",
     "nubank",
     "Mailer",
-    "Banks"
+    "Banks",
+    "Transactions"
   ]
 }
