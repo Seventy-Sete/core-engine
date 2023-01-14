@@ -8,20 +8,21 @@ class Auth
       NotifierUserMailer.with(email: email).new_account(token).deliver_later
 
       return {
-        user: nil,
-        fails: nil,
-        action: :create_account
+        follow_up: :check_user_email,
+        action: :preparation_to_create_account
       }
     elsif user_blocked?(user.id)
       return {
         user: {email: user.email},
         fails: user_fails(user.id),
-        action: :reset_password
+        action: :reset_password,
+        follow_up: :check_user_email,
       }
     else
       return {
         user: {email: user.email},
         fails: user_fails(user.id),
+        follow_up: :login_with_email,
         action: :login
       }
     end
@@ -42,6 +43,7 @@ class Auth
         user: {email: user.email, id: user.id},
         fails: user_fails(user.id),
         action: :logged_in,
+        follow_up: :be_creative,
         token: token
       }
     else
@@ -55,13 +57,15 @@ class Auth
         return {
           user: {email: user.email},
           fails: user_fails(user.id),
-          action: :reset_password
+          action: :reset_password,
+          follow_up: :check_user_email,
         }
       else
         return {
           user: {email: user.email},
           fails: user_fails(user.id),
-          action: :wrong_password
+          action: :wrong_password,
+          follow_up: :try_again,
         }
       end
     end
@@ -84,7 +88,8 @@ class Auth
   end
 
   def self.create_account(token, email, password)
-    return {action: :weak_password} unless strong_password?(password)
+    return {action: :weak_password,
+    follow_up: :try_again,} unless strong_password?(password)
 
     redis = Redis.new
     redis_key = Storage::Keys.new_account_password_link(token)
@@ -97,6 +102,7 @@ class Auth
         user: {email: user.email, id: user.id},
         fails: user_fails(user.id),
         action: :logged_in,
+        follow_up: :be_happy,
         token: token
       }
     else
@@ -104,6 +110,8 @@ class Auth
         user: nil,
         fails: nil,
         action: :create_account_fail
+        follow_up: :join_with_email,
+        and: :try_again,
       }
     end
   end
@@ -123,14 +131,28 @@ class Auth
         user: {email: user.email, id: user.id},
         fails: user_fails(user.id),
         action: :logged_in,
+        follow_up: :be_caution,
         token: token
       }
     else
-      return {
-        user: nil,
-        fails: nil,
-        action: :reset_password_fail
-      }
+      if user_blocked?(user_id)
+        token = generate_reset_password_link(user.id)
+        puts "Generated reset pass token: #{token}"
+        
+        NotifierUserMailer.with(email: email).reset_password(user.id, token).deliver_later
+        return {
+          user: nil,
+          fails: nil,
+          action: :reset_password_fail,
+          follow_up: :check_user_email,
+          and: :try_again,
+        }
+      else
+        return {
+          action: :reset_password_full_fail,
+          follow_up: :stop_kidding_me,
+        } 
+      end
     end
   end
   

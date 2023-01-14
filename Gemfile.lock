@@ -128,7 +128,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
-    nubank_sdk (0.7.1)
+    nubank_sdk (0.7.2)
       faraday (~> 2.7.1)
       json (~> 2.3)
     parallel (1.22.1)
@@ -237,7 +237,7 @@ DEPENDENCIES
   bootsnap
   debug
   faker (~> 3.0)
-  nubank_sdk
+  nubank_sdk (~> 0.7.2)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-cors

@@ -55,5 +55,5 @@ gem "faker", "~> 3.0"
 
 gem "sidekiq", "~> 7.0"
 
-# use a local version of the gem: nubank_sdk-0.7.01.gem
-gem "nubank_sdk"
+# Monitorize balances, recent transactions, credit limit etc...
+gem "nubank_sdk", "~> 0.7.2"
