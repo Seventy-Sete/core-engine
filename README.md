@@ -23,18 +23,8 @@ Things you may want to cover:
 
 * ...
 
-## Docker
-
-### Build
+Generate database encryption key
 
 ```bash
-docker-compose -f docker-compose.yml up --build
-```
-
-### Commands
-
-```bash
-docker-compose run web rails db:create
-docker-compose run web rails db:migrate
-docker-compose run web rails db:seed
+bin/rails db:encryption:init
 ```

@@ -9,6 +9,9 @@ gem "rails", "~> 7.0.4"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+# Override migration methods to support UUID columns without having to be explicit about it.
+gem 'ar-uuid'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -16,7 +19,7 @@ gem "puma", "~> 5.0"
 # gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+gem "redis"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -33,25 +36,24 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem "rack-cors"
-
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
-  gem "solargraph", "~> 0.48.0"
+  # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+  gem "rack-cors"
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-end
 
-gem 'ar-uuid'
+  gem "solargraph", "~> 0.48.0"
+end
 
 gem "faker", "~> 3.0"
 
 gem "sidekiq", "~> 7.0"
 
-gem "redis", "~> 5.0"
+# Monitorize balances, recent transactions, credit limit etc...
+gem "nubank_sdk", "~> 0.7.2"

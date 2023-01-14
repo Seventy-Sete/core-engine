@@ -28,8 +28,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-.env
-
-/config/credentials/development.key
+/config/test_env.yml
+/config/production_env.yml
+/config/development_env.yml
 
 thunder-tests
+certificates/*.p12

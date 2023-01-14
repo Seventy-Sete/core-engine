@@ -1,0 +1,10 @@
+Hello <%= @user.email %>, let's get started!
+==============================
+To activate your account you need create a password. Click the link below:
+<%= @link %>
+
+If you have any questions, please contact us at <%= Rails.configuration.action_mailer.default_options[:from] %>.
+
+Thanks,
+The <%= Rails.configuration.application_name %> Team
+

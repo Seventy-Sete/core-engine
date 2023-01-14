@@ -57,4 +57,24 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+  config.action_mailer.default_options = { from: ENV['GMAIL_USERNAME'] }
+  config.action_mailer.delivery_method = (ENV["GMAIL_DELIVERY_METHOD"] || 'test').to_sym
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'seventysete.com',
+    user_name:            ENV['GMAIL_USERNAME'],
+    password:             ENV['GMAIL_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto: true,
+    open_timeout:         5,
+    read_timeout:         5 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.host = ENV['host']
+  config.application_name = ENV['APPLICATION_NAME']
+  config.active_record.encryption.primary_key = ENV['ENCRYPTION_PRIMARY_KEY']
+  config.active_record.encryption.deterministic_key = ENV['ENCRYPTION_PRIMARY_KEY']
+  config.active_record.encryption.key_derivation_salt = ENV['ENCRYPTION_PRIMARY_KEY']
 end

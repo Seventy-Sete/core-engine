@@ -2,6 +2,12 @@
   "conventionalCommits.scopes": [
     "Users",
     "docker",
-    "Auth"
+    "Auth",
+    "Mailer",
+    "Banks",
+    "Transactions"
+  ],
+  "cSpell.words": [
+    "nubank"
   ]
 }
