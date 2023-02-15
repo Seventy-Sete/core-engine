@@ -1,37 +1,43 @@
-class Api::V1::AuthController < ApplicationController
-  def join_with_email
-    email = params[:email]
+# frozen_string_literal: true
 
-    render json: Clients::Auth.join_with_email(email)
-  end
+module Api
+  module V1
+    class AuthController < ApplicationController
+      def join_with_email
+        email = params[:email]
 
-  def login_with_email
-    email = params[:email]
-    password = request.headers['password']
+        render json: Auth::JoinWithEmail.call(email)
+      end
 
-    render json: Clients::Auth.login_with_email(email, password)
-  end
+      def login_with_email
+        email = params[:email]
+        password = request.headers['password']
 
-  def login_with_token
-    token = params[:token]
-    user_id = params[:user_id]
+        render json: Auth::LoginWithEmail.call(email, password)
+      end
 
-    render json: Clients::Auth.login_with_token(token, user_id)
-  end
+      def login_with_token
+        token = params[:token]
+        user_id = params[:user_id]
 
-  def create_account
-    token = params[:token]
-    email = params[:email]
-    password = request.headers['password']
+        render json: Auth::LoginWithToken.call(token, user_id)
+      end
 
-    render json: Clients::Auth.create_account(token, email, password)
-  end
+      def create_account
+        token = params[:token]
+        email = params[:email]
+        password = request.headers['password']
 
-  def reset_password
-    token = params[:token]
-    user_id = params[:user_id]
-    password = request.headers['password']
+        render json: Auth::CreateAccount.call(token, email, password)
+      end
 
-    render json: Clients::Auth.reset_password(token, user_id, password)
+      def reset_password
+        token = params[:token]
+        user_id = params[:user_id]
+        password = request.headers['password']
+
+        render json: Auth::ResetPassword.call(token, user_id, password)
+      end
+    end
   end
 end

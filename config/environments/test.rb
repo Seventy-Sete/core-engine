@@ -1,4 +1,6 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
+
+require 'active_support/core_ext/integer/time'
 
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
@@ -14,12 +16,12 @@ Rails.application.configure do
   # Eager loading loads your whole application. When running a single test locally,
   # this probably isn't necessary. It's a good idea to do in a continuous integration
   # system, or in some way before deploying your code.
-  config.eager_load = ENV["CI"].present?
+  config.eager_load = ENV['CI'].present?
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
-    "Cache-Control" => "public, max-age=#{1.hour.to_i}"
+    'Cache-Control' => "public, max-age=#{1.hour.to_i}"
   }
 
   # Show full error reports and disable caching.
@@ -58,21 +60,22 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
   config.action_mailer.default_options = { from: ENV['GMAIL_USERNAME'] }
-  config.action_mailer.delivery_method = (ENV["GMAIL_DELIVERY_METHOD"] || 'test').to_sym
+  config.action_mailer.delivery_method = (ENV['GMAIL_DELIVERY_METHOD'] || 'test').to_sym
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'seventysete.com',
-    user_name:            ENV['GMAIL_USERNAME'],
-    password:             ENV['GMAIL_PASSWORD'],
-    authentication:       'plain',
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'seventysete.com',
+    user_name: ENV['GMAIL_USERNAME'],
+    password: ENV['GMAIL_PASSWORD'],
+    authentication: 'plain',
     enable_starttls_auto: true,
-    open_timeout:         5,
-    read_timeout:         5 }
+    open_timeout: 5,
+    read_timeout: 5
+  }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
-  config.host = ENV['host']
+  config.host = ENV['HOST']
   config.application_name = ENV['APPLICATION_NAME']
   config.active_record.encryption.primary_key = ENV['ENCRYPTION_PRIMARY_KEY']
   config.active_record.encryption.deterministic_key = ENV['ENCRYPTION_PRIMARY_KEY']

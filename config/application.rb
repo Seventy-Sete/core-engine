@@ -1,6 +1,8 @@
-require_relative "boot"
+# frozen_string_literal: true
 
-require "rails/all"
+require_relative 'boot'
+
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -12,17 +14,17 @@ module CoreEngine
       env_file_name = "#{Rails.env}_env.yml"
       env_file = File.join(Rails.root, 'config', env_file_name)
 
-      if File.exist?(env_file)
+      if File.exist?(env_file) && File.exist?(env_file) && File.exist?(env_file)
         YAML.load(File.open(env_file)).each do |key, value|
           ENV[key.to_s] = value
-        end if File.exists?(env_file)
+        end
       end
     end
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    config.autoload_paths += %W(#{config.root}/components)
+    # config.autoload_paths += %W[#{config.root}/components]
 
     # Configuration for the application, engines, and railties goes here.
     #

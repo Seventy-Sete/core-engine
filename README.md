@@ -26,5 +26,25 @@ Things you may want to cover:
 Generate database encryption key
 
 ```bash
-bin/rails db:encryption:init
+docker compose run web bin/rails db:encryption:init
+```
+
+Build image
+```bash
+docker compose build
+```
+
+up container
+```bash
+docker compose up
+```
+
+Run migration
+```bash
+docker compose run web bin/rails db:migrate
+```
+
+Run test
+```bash
+docker compose run web bin/rails test
 ```
