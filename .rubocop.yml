@@ -1,0 +1,4 @@
+Lint/MissingSuper:
+  Enabled: false
+Style/Documentation:
+  Enabled: false

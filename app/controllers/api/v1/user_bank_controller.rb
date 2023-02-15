@@ -1,19 +1,34 @@
-class Api::V1::UserBankController < ApplicationController
-  def account_balance
-  end
+# frozen_string_literal: true
 
-  def credit_balances
-  end
+module Api
+  module V1
+    class UserBankController < ProtectedApplicationController
+      def list
+        render json: Banks::Info::ListAll.call(user: current_user)
+      end
 
-  def account_feed
-  end
+      def new
+        bank_name = params[:bank_name]
+        amount = params[:amount]
 
-  def credit_feed
-  end
+        render json: Banks::Info::CreateUserBank.call(
+          user: current_user,
+          bank_name:,
+          amount:
+        )
+      end
 
-  def account_details
-  end
+      def account_balance; end
 
-  def credit_details
+      def credit_balances; end
+
+      def account_feed; end
+
+      def credit_feed; end
+
+      def account_details; end
+
+      def credit_details; end
+    end
   end
 end

@@ -14,3 +14,5 @@ GMAIL_DELIVERY_METHOD: 'test'
 HOST: 'localhost:3000'
 
 APPLICATION_NAME: 'Seventy Sete(Development)'
+
+REDIS_URL: 'redis://localhost:6379/1'

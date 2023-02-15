@@ -1,0 +1,14 @@
+{
+    "name": "Ruby 2.7 with Solargraph and Rubocop",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "web",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "castwide.solargraph",
+        "misogi.ruby-rubocop"
+    ],
+    "postCreateCommand": "gem install solargraph; gem install rubocop",
+    "workspaceFolder": "/core-engine"
+}
