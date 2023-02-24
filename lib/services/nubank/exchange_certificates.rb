@@ -18,7 +18,7 @@ module Nubank
       user_nubank.auth.p_key = recovered_codes[:p_key]
 
       user_nubank.auth.exchange_certs(email_code, password, recovered_codes[:encrypted_code])
-      Nubank::NewToken.call(password)
+      # Nubank::NewToken.call(password)
       @user_bank.update(status: :active)
 
       {
@@ -30,7 +30,7 @@ module Nubank
     private
 
     def user_nubank
-      @user_nubank ||= NubankSdk::Client.new cpf: user_bank.bcn
+      @user_nubank ||= NubankSdk::User.new cpf: user_bank.bcn
     end
 
     def recovery_codes

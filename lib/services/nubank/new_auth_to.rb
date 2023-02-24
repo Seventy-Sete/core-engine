@@ -2,8 +2,6 @@
 
 module Nubank
   class NewAuthTo < ApplicationService
-    include NubankSdk
-
     attr_reader :user_id, :bcn
 
     def initialize(user_id, bcn)

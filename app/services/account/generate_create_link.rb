@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Account
-  class GenerateCreateLink
+  class GenerateCreateLink < ApplicationService
     include Storage::Keys
 
     attr_reader :email

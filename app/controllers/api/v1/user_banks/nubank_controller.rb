@@ -8,7 +8,7 @@ module Api
           request_entrypoint(:nubank_module)
 
           bcn = params[:bcn]
-          render json: Banks::Nubank.new(@user_id).new_auth_to(bcn), status: :ok
+          render json: Nubank::NewAuthTo.call(@user_id, bcn), status: :ok
         rescue StandardError => e
           render json: { error: e.message }, status: :bad_request
         end
@@ -19,7 +19,7 @@ module Api
           user_bank_id = params[:id]
           password = request.headers['X-User-Password']
 
-          render json: Banks::Nubank.new(@user_id, user_bank_id).request_email_code(password), status: :ok
+          render json: Nubank::RequestEmailCode.call(user_bank_id, password), status: :ok
         rescue StandardError => e
           render json: { error: e.message }, status: :bad_request
         end
@@ -31,7 +31,7 @@ module Api
           email_code = params[:email_code]
           password = request.headers['X-User-Password']
 
-          render json: Banks::Nubank.new(@user_id, user_bank_id).exchange_certificates(email_code, password),
+          render json: Nubank::ExchangeCertificates.call(user_bank_id, email_code, password),
                  status: :ok
         rescue StandardError => e
           render json: { error: e.message }, status: :bad_request

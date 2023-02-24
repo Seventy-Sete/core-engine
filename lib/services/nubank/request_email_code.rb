@@ -29,7 +29,7 @@ module Nubank
     private
 
     def user_nubank
-      @user_nubank ||= NubankSdk::Client.new cpf: user_bank.bcn
+      @user_nubank ||= NubankSdk::User.new cpf: user_bank.bcn
     end
 
     def user_bank

@@ -24,7 +24,7 @@ module CoreEngine
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    # config.autoload_paths += %W[#{config.root}/components]
+    config.autoload_paths += %W[#{config.root}/lib/services]
 
     # Configuration for the application, engines, and railties goes here.
     #
