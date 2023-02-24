@@ -8,8 +8,9 @@ module Api
       end
 
       def new
-        bank_name = params[:bank_name]
-        amount = params[:amount]
+        body = JSON.parse(request.body.read)
+        bank_name = body['bank_name']
+        amount = body['amount']
 
         render json: Banks::Info::CreateUserBank.call(
           user: current_user,

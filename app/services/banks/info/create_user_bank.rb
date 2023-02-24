@@ -12,8 +12,6 @@ module Banks
       end
 
       def call
-        UserBank.delete_all
-        BankDetail.delete_all
         bank = user.user_banks.create(
           bank: :default,
           bank_name:,

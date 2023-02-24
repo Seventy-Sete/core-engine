@@ -29,7 +29,7 @@ module Api
 
           user_bank_id = params[:id]
           email_code = params[:email_code]
-          password = (request.headers || {})['X-User-Password'] || (params[:headers] || {})['X-User-Password']
+          password = request.headers['X-User-Password']
 
           render json: Banks::Nubank.new(@user_id, user_bank_id).exchange_certificates(email_code, password),
                  status: :ok
@@ -40,8 +40,8 @@ module Api
         private
 
         def request_entrypoint(_feature)
-          @user_id = (request.headers || {})['X-User-Id'] || (params[:headers] || {})['X-User-Id']
-          @token = (request.headers || {})['X-User-Token'] || (params[:headers] || {})['X-User-Token']
+          @user_id = request.headers['X-User-Id']
+          @token = request.headers['X-User-Token']
 
           # access = Features::Control.new(@user_id, @token).access?(feature)
           # raise 'Access denied' unless access

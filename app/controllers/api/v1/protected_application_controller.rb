@@ -15,14 +15,9 @@ module Api
       end
 
       def auth_parameters
-        headers = if request.post?
-                    request.params['headers']
-                  else
-                    request.headers
-                  end
         {
-          user_id: headers['X-User-Id'],
-          token: headers['X-User-Token']
+          user_id: request.headers['X-User-Id'],
+          token: request.headers['X-User-Token']
         }
       end
     end
