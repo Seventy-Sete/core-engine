@@ -37,6 +37,14 @@ module Api
           render json: { error: e.message }, status: :bad_request
         end
 
+        def fetch_account_details
+          user_bank_id = params[:id]
+
+          render json: Nubank::FetchAccountDetails.call(user_bank_id), status: :ok
+        rescue StandardError => e
+          render json: { error: e.message }, status: :bad_request
+        end
+
         private
 
         def request_entrypoint(_feature)

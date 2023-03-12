@@ -2,6 +2,7 @@
 
 module Nubank
   class ExchangeCertificates < ApplicationService
+    include NubankSdk
     include Storage::Keys
 
     attr_reader :user_bank_id, :email_code, :password
@@ -19,7 +20,10 @@ module Nubank
 
       user_nubank.auth.exchange_certs(email_code, password, recovered_codes[:encrypted_code])
       # Nubank::NewToken.call(password)
-      @user_bank.update(status: :active)
+      user_bank.update(
+        status: :active,
+        access_key: password
+      )
 
       {
         follow_up: :account_details,
@@ -35,15 +39,10 @@ module Nubank
 
     def recovery_codes
       data = redis.hgetall(redis_key)
-      redis.expire(redis_key, expires_at)
       {
         encrypted_code: data['encrypted_code'],
         p_key: OpenSSL::PKey::RSA.new(data['p_key'])
       }
-    end
-
-    def expires_at
-      7.hours.to_i
     end
 
     def redis

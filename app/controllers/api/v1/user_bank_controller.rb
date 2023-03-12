@@ -7,6 +7,10 @@ module Api
         render json: Banks::Info::ListAll.call(user: current_user)
       end
 
+      def transactions
+        render json: Banks::Info::Transactions.call(user: current_user)
+      end
+
       def new
         body = JSON.parse(request.body.read)
         bank_name = body['bank_name']
@@ -30,6 +34,12 @@ module Api
       def account_details; end
 
       def credit_details; end
+
+      def delete
+        user_bank_id = params[:id]
+
+        render json: UserBank.find(user_bank_id).destroy
+      end
     end
   end
 end

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 1.5
+  user_bank: MyString
+  current: 1.5
+  used: 1.5
+
+two:
+  total: 1.5
+  user_bank: MyString
+  current: 1.5
+  used: 1.5

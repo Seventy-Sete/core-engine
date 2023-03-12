@@ -12,6 +12,7 @@ Rails.application.routes.draw do
             # get 'auth_validate', to: 'nubank#auth_validate'
             get 'request_email_code', to: 'nubank#request_email_code'
             post 'exchange_certificates/:email_code', to: 'nubank#exchange_certificates'
+            get 'fetch_account_details', to: 'nubank#fetch_account_details'
           end
         end
       end
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
       resources :user_banks, only: [] do
         collection do
           get '', to: 'user_bank#list'
+          get 'transactions', to: 'user_bank#transactions'
           post 'new', to: 'user_bank#new'
         end
         member do
@@ -29,7 +31,7 @@ Rails.application.routes.draw do
           get 'account_details', to: 'user_bank#account_details'
           get 'credit_details', to: 'user_bank#credit_details'
           put 'update', to: 'user_bank#update'
-          delete 'delete', to: 'user_bank#delete'
+          delete '', to: 'user_bank#delete'
         end
       end
       resources :auth, only: [] do
